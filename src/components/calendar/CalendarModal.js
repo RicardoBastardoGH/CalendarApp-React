@@ -6,7 +6,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2'
 import { useDispatch, useSelector } from 'react-redux';
 import { uiCloseModal } from '../../actions/ui';
-import { eventAddNew, eventClearActiveEvent, eventUpdated } from '../../actions/events';
+import { eventClearActiveEvent, eventStartAddNew, eventStartUpdated } from '../../actions/events';
 
 const customStyles = {
     content : {
@@ -90,8 +90,8 @@ export const CalendarModal = () => {
         const momentStart = moment( start );
         const momentEnd = moment( end );
         
-        console.log(momentStart);
-        console.log(momentEnd);
+        // console.log(momentStart);
+        // console.log(momentEnd);
 
         if( momentStart.isSameOrAfter(momentEnd) ){
             return Swal.fire('Error', 'la fecha y hora fin, debe ser mayor a la fecha de inicio', 'error');
@@ -101,20 +101,12 @@ export const CalendarModal = () => {
             setTitleValid( false );
         }
 
-        // console.log(formValues)
-
         if( activeEvent ){
-            dispatch( eventUpdated( formValues ) )
+            dispatch( eventStartUpdated( formValues ) )
         }else{
         // TODO realizar grabacion en BD
-            dispatch( eventAddNew({
-                ...formValues,
-                id: new Date().getTime(),
-                user: {
-                    _id: '123',
-                    name: 'Ricardo'
-                }
-            }) );
+            // creando el evento
+            dispatch( eventStartAddNew({ formValues }) );
         }
         
 

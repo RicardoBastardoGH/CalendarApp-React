@@ -85,8 +85,11 @@ export const startLogout = () => {
         localStorage.clear(); 
         
         dispatch( logout());
+        dispatch( eventLogoutCleaning());
+
     }
 }
 
 
-const logout = () => ({ type: types.authLogout })
+const logout = () => ({ type: types.authLogout });
+const eventLogoutCleaning = () => ({ type: types.eventLogoutCleaning });

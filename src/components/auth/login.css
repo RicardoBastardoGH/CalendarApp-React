@@ -49,3 +49,7 @@
     font-weight: 600;
     text-decoration: none;
 }
+.form-group{
+    padding-top:5px;
+    padding-bottom:5px;
+}
